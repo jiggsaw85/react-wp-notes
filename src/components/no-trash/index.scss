@@ -1,0 +1,22 @@
+.no-trash-wrapper {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding-top: 30px;
+
+    p {
+        font-size: 24px;
+    }
+
+    .all-notes {
+        background-color: rgba(100, 189, 136, 1);
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #FB7762;
+        }
+    }
+}

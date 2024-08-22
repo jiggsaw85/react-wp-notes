@@ -1,9 +1,9 @@
 import React from 'react';
 import Masonry from 'react-masonry-css';
-import NoteCard from './NoteCard';
-import './MasonrySlider.css';
+import NoteCard from '../note-card/note-card';
+import './index.scss';
 
-const MasonrySlider = () => {
+const MasonrySlider = ({ notes, selectedCategory, reloadPosts, setReloadPosts }) => {
     const breakpointColumnsObj = {
         default: 4,
         1100: 3,
@@ -11,11 +11,12 @@ const MasonrySlider = () => {
         500: 1
     };
 
-    const notes = [
-        { title: 'WooCommerce', content: 'WooCommerce has grown to become...', bgColor: '#d7efff' },
-        { title: '', content: '', image: 'path_to_image.jpg' },
-        { title: 'Built on WordPress', content: 'WooCommerce is an extension...', bgColor: '#ffccc7' },
-    ];
+    const filteredNotes = selectedCategory === 'all'
+        ? notes.filter(note => note.category !== 'trash')
+        : notes.filter(note => note.category === selectedCategory);
+
+    console.log(filteredNotes)
+    console.log(selectedCategory)
 
     return (
         <Masonry
@@ -23,8 +24,8 @@ const MasonrySlider = () => {
             className="masonry-grid"
             columnClassName="masonry-grid_column"
         >
-            {notes.map((note, index) => (
-                <NoteCard key={index} note={note} />
+            {filteredNotes.map((note, index) => (
+                <NoteCard key={index} note={note} reloadPosts={reloadPosts} setReloadPosts={setReloadPosts} />
             ))}
         </Masonry>
     );

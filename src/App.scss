@@ -1,0 +1,17 @@
+@media (max-width: 1024px) {
+  .homepage {
+    .main-content {
+      margin-left: 0;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .homepage {
+    flex-direction: column;
+    .main-content {
+      margin-left: 0;
+      padding: 10px;
+    }
+  }
+}
