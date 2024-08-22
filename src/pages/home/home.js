@@ -5,15 +5,18 @@ import MasonrySlider from '../../components/masonry-slider/masonry-slider';
 import './index.scss';
 import Popup from "../../components/popup/popup";
 import NoTrash from "../../components/no-trash/no-trash";
+import Loading from "../../components/loading/Loading";
 
 const HomePage = () => {
     const [open, setOpen] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [reloadPosts, setReloadPosts] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [notes, setNotes] = useState([]);
     const [trashedPosts, setTrashedPosts] = useState([]);
 
     useEffect(() => {
+        setLoading(true);
         const getPosts = async () => {
             const response = await fetch(`${process.env.REACT_APP_API_URL}/wp-json/react-wp/v1/get-posts?category=${selectedCategory}`);
 
@@ -28,11 +31,16 @@ const HomePage = () => {
             }
         };
 
-        getPosts();
+        getPosts().then(() => {
+            setTimeout(() => {
+                setLoading(false)
+            }, 500)
+        });
     }, [selectedCategory, reloadPosts])
 
     return (
         <div className="homepage">
+            {loading && <Loading />}
             <Sidebar selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
             <div className="main-content">
                 <Header
