@@ -15,9 +15,6 @@ const MasonrySlider = ({ notes, selectedCategory, reloadPosts, setReloadPosts })
         ? notes.filter(note => note.category !== 'trash')
         : notes.filter(note => note.category === selectedCategory);
 
-    console.log(filteredNotes)
-    console.log(selectedCategory)
-
     return (
         <Masonry
             breakpointCols={breakpointColumnsObj}

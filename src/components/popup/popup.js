@@ -76,75 +76,77 @@ export default function Popup({setOpen, open, setReloadPosts, reloadPosts, note}
     };
 
     return (
-        <div className="popup">
-            <h3>
-                {note ? "Edit Note" : "Add Note"}
-            </h3>
-            <p>What kind of note would you like to add?</p>
-            <div className="radio-buttons">
-                <label>
-                    <input
-                        type="radio"
-                        name="options"
-                        value="note"
-                        disabled={note}
-                        checked={note ? note?.category === 'note' : selectedCategory === 'note'}
-                        onChange={() => {setSelectedCategory('note')}}
-                    />
-                    <NoteIcon className="icon" />
-                    <span>Note</span>
-                </label>
+        <div className="overlay">
+            <div className="popup">
+                <h3>
+                    {note ? "Edit Note" : "Add Note"}
+                </h3>
+                <p>What kind of note would you like to add?</p>
+                <div className="radio-buttons">
+                    <label>
+                        <input
+                            type="radio"
+                            name="options"
+                            value="note"
+                            disabled={note}
+                            checked={note ? note?.category === 'note' : selectedCategory === 'note'}
+                            onChange={() => {setSelectedCategory('note')}}
+                        />
+                        <NoteIcon className="icon" />
+                        <span>Note</span>
+                    </label>
 
-                <label>
-                    <input
-                        type="radio"
-                        name="options"
-                        value="image"
-                        disabled={note}
-                        checked={note ? note?.category === 'image' : selectedCategory === 'image'}
-                        onChange={() => {setSelectedCategory('image')}}
-                    />
-                    <ImageIcon className="icon" />
-                    <span>Image</span>
-                </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="options"
+                            value="image"
+                            disabled={note}
+                            checked={note ? note?.category === 'image' : selectedCategory === 'image'}
+                            onChange={() => {setSelectedCategory('image')}}
+                        />
+                        <ImageIcon className="icon" />
+                        <span>Image</span>
+                    </label>
 
-                <label>
-                    <input
-                        type="radio"
-                        name="options"
-                        value="link"
-                        disabled={note}
-                        checked={note ? note?.category === 'link' : selectedCategory === 'link'}
-                        onChange={() => {setSelectedCategory('link')}}
-                    />
-                    <LinkIcon className="icon" />
-                    <span>Link</span>
-                </label>
-            </div>
-            <div className="form">
-                {note ? (
-                    note.category === 'note' ? (
-                        <CreateNote setTitle={setTitle} setDescription={setDescription} note={note} />
-                    ) : note.category === 'link' ? (
-                        <LinkNote setTitle={setTitle} note={note} />
-                    ) : note.category === 'image' ? (
-                        <ImageNote setTitle={setTitle} note={note} />
-                    ) : null
-                ) : (
-                    selectedCategory === 'note' ? (
-                        <CreateNote setTitle={setTitle} setDescription={setDescription} note={note} />
-                    ) : selectedCategory === 'link' ? (
-                        <LinkNote setTitle={setTitle} note={note} />
-                    ) : selectedCategory === 'image' ? (
-                        <ImageNote setTitle={setTitle} note={note} />
-                    ) : null
-                )}
-            </div>
-            <div className="buttons">
-                <span onClick={() => setOpen(false)}>Cancel</span>
-                <button onClick={() => {note ? updatePost() : createPost()}} className="add-new">
-                    {note ? "Edit" : "Add New"}
-                </button>
+                    <label>
+                        <input
+                            type="radio"
+                            name="options"
+                            value="link"
+                            disabled={note}
+                            checked={note ? note?.category === 'link' : selectedCategory === 'link'}
+                            onChange={() => {setSelectedCategory('link')}}
+                        />
+                        <LinkIcon className="icon" />
+                        <span>Link</span>
+                    </label>
+                </div>
+                <div className="form">
+                    {note ? (
+                        note.category === 'note' ? (
+                            <CreateNote setTitle={setTitle} setDescription={setDescription} note={note} />
+                        ) : note.category === 'link' ? (
+                            <LinkNote setTitle={setTitle} note={note} />
+                        ) : note.category === 'image' ? (
+                            <ImageNote setTitle={setTitle} note={note} />
+                        ) : null
+                    ) : (
+                        selectedCategory === 'note' ? (
+                            <CreateNote setTitle={setTitle} setDescription={setDescription} note={note} />
+                        ) : selectedCategory === 'link' ? (
+                            <LinkNote setTitle={setTitle} note={note} />
+                        ) : selectedCategory === 'image' ? (
+                            <ImageNote setTitle={setTitle} note={note} />
+                        ) : null
+                    )}
+                </div>
+                <div className="buttons">
+                    <span onClick={() => setOpen(false)}>Cancel</span>
+                    <button onClick={() => {note ? updatePost() : createPost()}} className="add-new">
+                        {note ? "Edit" : "Add New"}
+                    </button>
+                </div>
             </div>
         </div>
     );
